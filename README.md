@@ -1,5 +1,5 @@
 <div align="center">
-<h1>eslint-config-daren</h1>
+<h1>eslint-config-drarrie</h1>
 
 <p>These are my settings for ESLint and Prettier</p>
 <p>You might like them - or you might not. Don't worry you can always change them.</p>
@@ -32,7 +32,7 @@
 This module should be installed as one of your project's `devDependencies`:
 
 ```
-npx install-peerdeps --dev eslint-config-daren
+npx install-peerdeps --dev eslint-config-drarrie
 ```
 
 ## Usage
@@ -41,7 +41,7 @@ Then add the extends to your .eslintrc.js:
 
 ```js
 module.exports = {
-  extends: "daren",
+  extends: "drarrie",
   rules: {
     // your overrides
   },
@@ -54,7 +54,7 @@ You can use other configs in combination with the main eslint.
 
 ```js
 module.exports = {
-  extends: ['daren', 'daren/<config-name>'],
+  extends: ['drarrie', 'drarrie/<config-name>'],
 }
 ```
 
@@ -63,10 +63,10 @@ module.exports = {
 ```js
 module.exports = {
   extends: [
-    'daren',
-    'daren/react',
-    'daren/jsx-a11y',
-    'daren/tailwind',
+    'drarrie',
+    'drarrie/react',
+    'drarrie/jsx-a11y',
+    'drarrie/tailwind',
   ],
   rules: {
     // your overrides
