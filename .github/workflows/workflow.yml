@@ -3,22 +3,23 @@ on:
   push:
     branches:
       - "main"
-  pull_request: {}
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
   main:
     strategy:
       matrix:
-        node: [14, 15]
+        node: [16]
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel ongoing builds
-        uses: styfle/cancel-workflow-action@0.9.0
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@b173b6ec0100793626c2d9e6b90435061f4fc3e5 # 0.11.0
 
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3
 
-      - name: Setup node
-        uses: actions/setup-node@v2
+      - name: ⎔ Setup node
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3
         with:
           node-version: ${{ matrix.node }}
 
@@ -29,24 +30,23 @@ jobs:
         env:
           HUSKY_SKIP_INSTALL: true
 
-      - name: Run validate script
-        run: npm run validate
+      - run: npm run validate
 
   release:
     needs: main
     runs-on: ubuntu-latest
     if: ${{ github.repository == 'darenmalfait/eslint-config-daren' && github.event_name == 'push' }}
     steps:
-      - name: Cancel ongoing builds
-        uses: styfle/cancel-workflow-action@0.9.0
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@b173b6ec0100793626c2d9e6b90435061f4fc3e5 # 0.11.0
 
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3
 
-      - name: Setup node
-        uses: actions/setup-node@v2
+      - name: ⎔ Setup node
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3
         with:
-          node-version: 14
+          node-version: ${{ matrix.node }}
 
       - name: Download dependencies
         uses: bahmutov/npm-install@v1
@@ -55,8 +55,7 @@ jobs:
         env:
           HUSKY_SKIP_INSTALL: true
 
-      - name: Run validation script
-        run: npm run validate
+      - run: npm run validate
 
       - name: 🚀
         uses: cycjimmy/semantic-release-action@v2
